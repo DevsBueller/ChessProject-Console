@@ -14,7 +14,7 @@ namespace Chess_Project_Console
 			
 
 			Tabuleiro Tab  = new Tabuleiro(8, 8);
-		
+			Tela.ImprimirTabuleiro(Tab);
 
 			Console.ReadLine();
 
