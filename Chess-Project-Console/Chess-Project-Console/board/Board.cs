@@ -18,10 +18,42 @@ namespace board
 		{
 			return pieces[linha, coluna];
 		}
+		public Piece Piece(Position pos)
+		{
+			return pieces[pos.Linha, pos.Coluna];
+		}
+
+
 		public void ColocarPeca(Piece p, Position pos)
 		{
-			pieces[pos.Linha, pos.Coluna] = p;
-			p.Position = pos;
+			if (PositionExist(pos))
+			{
+				throw new BoadException("Já existe uma peça nessa posição");
+			}
+				pieces[pos.Linha, pos.Coluna] = p;
+				p.Position = pos;
+			
 		}
+		public bool PositionExist(Position pos)
+		{
+			PositionValidation(pos);
+			return Piece(pos) != null;
+		}
+		public bool ValidPosition(Position position)
+		{
+			if (position.Linha < 0 || position.Linha >= Linhas || position.Coluna < 0 || position.Coluna >= Colunas)
+			{
+				return false;
+			}
+			return true;
+		}
+		public void PositionValidation(Position pos)
+		{
+			if (!ValidPosition(pos))
+			{
+				throw new BoadException("Posição Inválida!");
+			}
+		}
+
 	}
 }
