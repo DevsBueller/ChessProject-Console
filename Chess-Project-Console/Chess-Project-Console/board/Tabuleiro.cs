@@ -1,6 +1,6 @@
 ﻿
 
-namespace tabuleiro
+namespace board
 {
 	class Tabuleiro
 	{
@@ -17,6 +17,11 @@ namespace tabuleiro
 		public Peca Peca(int linha, int coluna)
 		{
 			return pecas[linha, coluna];
+		}
+		public void ColocarPeca(Peca p, Posicao pos)
+		{
+			pecas[pos.Linha, pos.Coluna] = p;
+			p.Posicao = pos;
 		}
 	}
 }

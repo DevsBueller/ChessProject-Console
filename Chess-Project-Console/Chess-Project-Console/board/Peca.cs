@@ -1,6 +1,6 @@
 ﻿
 
-namespace tabuleiro
+namespace board
 {
 	class Peca
 	{
@@ -9,9 +9,9 @@ namespace tabuleiro
 		public int QtdMovimentos { get; set; }
 		public Tabuleiro Tab { get; set; }
 
-		public Peca(Posicao posicao, Cor cor, Tabuleiro tabuleiro)
+		public Peca(Tabuleiro tabuleiro, Cor cor)
 		{
-			Posicao = posicao;
+			Posicao = null;
 			Cor = cor;
 			QtdMovimentos = 0;
 			Tab = tabuleiro;
