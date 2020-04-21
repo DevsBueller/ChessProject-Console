@@ -13,21 +13,23 @@ namespace Chess_Project_Console
 	{
 		static void Main(string[] args)
 		{
-			try
-			{
-				Board Bd = new Board(8, 8);
-				Bd.ColocarPeca(new Tower(Bd, Color.Black), new Position(0, 0));
-				Bd.ColocarPeca(new Tower(Bd, Color.Black), new Position(1, 7));
-				Bd.ColocarPeca(new King(Bd, Color.Black), new Position(0, 0));
-				Tela.ImprimirTabuleiro(Bd);
+			//try
+			//{
+			//	Board Bd = new Board(8, 8);
+			//	Bd.ColocarPeca(new Tower(Bd, Color.Black), new Position(0, 0));
+			//	Bd.ColocarPeca(new Tower(Bd, Color.Black), new Position(1, 7));
+			//	Bd.ColocarPeca(new King(Bd, Color.Black), new Position(0, 0));
+			//	Tela.ImprimirTabuleiro(Bd);
 
-			}
-			catch (Exception e)
-			{
+			//}
+			//catch (Exception e)
+			//{
 
-				Console.WriteLine(e.Message);
-			}
-
+			//	Console.WriteLine(e.Message);
+			//}
+			ChessPosition ChessPosition = new ChessPosition('c', 7);
+			Console.WriteLine(ChessPosition);
+			Console.WriteLine(ChessPosition.ToPosition());
 
 			Console.ReadLine();
 
