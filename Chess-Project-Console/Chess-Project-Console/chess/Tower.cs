@@ -2,15 +2,15 @@
 
 namespace chess
 {
-	class Rei: Peca
+	class Tower : Piece
 	{
-		public Rei (Tabuleiro tab, Cor cor):base(tab, cor)
+		public Tower(Board tab, Color cor) : base(tab, cor)
 		{
 
 		}
 		public override string ToString()
 		{
-			return "R";
+			return "T";
 		}
 	}
 }

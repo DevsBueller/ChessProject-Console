@@ -15,11 +15,11 @@ namespace Chess_Project_Console
 		{
 			
 
-			Tabuleiro Tab  = new Tabuleiro(8, 8);
-			Tab.ColocarPeca(new Torre(Tab, Cor.Preta), new Posicao(0, 0)); 
-			Tab.ColocarPeca(new Torre(Tab, Cor.Preta), new Posicao(1, 3));
-			Tab.ColocarPeca(new Rei(Tab, Cor.Preta), new Posicao(2, 4));
-			Tela.ImprimirTabuleiro(Tab);
+			Board Bd  = new Board(8, 8);
+			Bd.ColocarPeca(new Tower(Bd, Color.Preta), new Position(0, 0));
+			Bd.ColocarPeca(new Tower(Bd, Color.Preta), new Position(1, 3));
+			Bd.ColocarPeca(new King(Bd, Color.Preta), new Position(2, 4));
+			Tela.ImprimirTabuleiro(Bd);
 
 			Console.ReadLine();
 
