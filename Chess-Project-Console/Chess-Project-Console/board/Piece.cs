@@ -2,7 +2,7 @@
 
 namespace board
 {
-	class Piece
+	abstract class Piece
 	{
 		public Position Position { get; set; }
 		public Color Color { get; set; }
@@ -16,9 +16,11 @@ namespace board
 			QtMovies = 0;
 			Bd = board;
 		}
+		
 		public void AddQtMovies()
 		{
 			QtMovies++;
 		}
+		public abstract bool[,] PossibleMovies();
 	}
 }

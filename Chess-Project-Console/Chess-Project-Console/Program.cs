@@ -20,10 +20,16 @@ namespace Chess_Project_Console
 				{
 					Console.Clear();
 					Tela.PrintBoard(Match.Bd);
+
 					Console.WriteLine();
-					Console.WriteLine("Origem:");
+					Console.Write("Origem: ");
 					Position origin = Tela.ReadChessPosition().ToPosition();
-					Console.WriteLine("Destino");
+
+					Console.Clear();
+					bool[,] possiblePositions = Match.Bd.Piece(origin).PossibleMovies();
+					Tela.PrintBoard(Match.Bd, possiblePositions);
+					Console.WriteLine();
+					Console.Write("Destino: ");
 					Position destination = Tela.ReadChessPosition().ToPosition();
 
 					Match.ExecuteMove(origin, destination);

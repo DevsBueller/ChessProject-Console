@@ -18,6 +18,12 @@ namespace board
 			Linha = linha;
 			Coluna = coluna;
 		}
+		public void DefineValue(int linha, int coluna)
+		{
+			Linha = linha;
+			Coluna = coluna;
+
+		}
 		public override string ToString()
 		{
 			return Linha + "," + Coluna;

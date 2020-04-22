@@ -36,7 +36,7 @@ namespace chess
 			Bd.PutPiece(new Tower(Bd, Color.White), new ChessPosition('d', 2).ToPosition());
 			Bd.PutPiece(new Tower(Bd, Color.White), new ChessPosition('e', 2).ToPosition());
 			Bd.PutPiece(new Tower(Bd, Color.White), new ChessPosition('e', 1).ToPosition());
-			Bd.PutPiece(new Tower(Bd, Color.White), new ChessPosition('d', 1).ToPosition());
+			Bd.PutPiece(new King(Bd, Color.White), new ChessPosition('d', 1).ToPosition());
 
 
 			Bd.PutPiece(new Tower(Bd, Color.Black), new ChessPosition('c', 7).ToPosition());
@@ -44,7 +44,7 @@ namespace chess
 			Bd.PutPiece(new Tower(Bd, Color.Black), new ChessPosition('d', 7).ToPosition());
 			Bd.PutPiece(new Tower(Bd, Color.Black), new ChessPosition('e', 7).ToPosition());
 			Bd.PutPiece(new Tower(Bd, Color.Black), new ChessPosition('e', 8).ToPosition());
-			Bd.PutPiece(new Tower(Bd, Color.Black), new ChessPosition('d', 8).ToPosition());
+			Bd.PutPiece(new King(Bd, Color.Black), new ChessPosition('d', 8).ToPosition());
 		}
 
 
