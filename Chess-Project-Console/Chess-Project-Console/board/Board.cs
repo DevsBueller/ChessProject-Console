@@ -28,7 +28,7 @@ namespace board
 		{
 			if (PositionExist(pos))
 			{
-				throw new BoadException("Já existe uma peça nessa posição");
+				throw new BoardException("Já existe uma peça nessa posição");
 			}
 				pieces[pos.Linha, pos.Coluna] = p;
 				p.Position = pos;
@@ -65,7 +65,7 @@ namespace board
 		{
 			if (!ValidPosition(pos))
 			{
-				throw new BoadException("Posição Inválida!");
+				throw new BoardException("Posição Inválida!");
 			}
 		}
 

@@ -21,6 +21,29 @@ namespace board
 		{
 			QtMovies++;
 		}
-		public abstract bool[,] PossibleMovies();
+		public bool ExistPossibleMoves()
+		{
+			bool[,] mat = PossibleMoves();
+			for (int i = 0; i < Bd.Linhas; i++)
+			{
+				for (int j = 0; j < Bd.Colunas; j++)
+				{
+					if(mat[i, j])
+					{
+						return true;
+					}
+
+				}
+
+			}
+			return false;
+
+		}
+		public bool CanMoveTo(Position pos)
+		{
+			return PossibleMoves()[pos.Linha, pos.Coluna];
+		}
+		public abstract bool[,] PossibleMoves();
+
 	}
 }

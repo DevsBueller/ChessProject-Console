@@ -9,8 +9,8 @@ namespace chess
 	class ChessMatch
 	{
 		public Board Bd { get; private set; }
-		private int shift;
-		private Color currentPlayer;
+		public int shift { get; private set; }
+		public Color currentPlayer { get; private set; }
 		public bool Finished { get; private set; }
 
 		public ChessMatch()
@@ -24,10 +24,51 @@ namespace chess
 		}
 		public void ExecuteMove(Position origin, Position destination)
 		{
-			Piece p  = Bd.GetPiece(origin);
+			Piece p = Bd.GetPiece(origin);
 			p.AddQtMovies();
 			Piece catchPiece = Bd.GetPiece(destination);
 			Bd.PutPiece(p, destination);
+		}
+		public void MakeMove(Position origin, Position destination)
+		{
+			ExecuteMove(origin, destination);
+			shift++;
+			ChangePlayer();
+
+		}
+		public void ValidateOriginPosition(Position pos)
+		{
+			if (Bd.Piece(pos) == null)
+			{
+				throw new BoardException("Não existe uma peça na posição de origem escolhida!");
+			}
+			if (currentPlayer != Bd.Piece(pos).Color)
+			{
+				throw new BoardException("A peça de origem escolhida não é sua!");
+			}
+			if (!Bd.Piece(pos).ExistPossibleMoves())
+			{
+				throw new BoardException("Não há movimentos possíveis para a peça de origem escolhida!");
+			}
+		}
+		public void ValidateDestinationPosition(Position origin, Position destination)
+		{
+			if (!Bd.Piece(origin).CanMoveTo(destination))
+			{
+				throw new BoardException("Posição de destino inválida!");
+			}
+			
+		}
+		private void ChangePlayer()
+		{
+			if (currentPlayer == Color.White)
+			{
+				currentPlayer = Color.Black;
+			}
+			else
+			{
+				currentPlayer = Color.White;
+			}
 		}
 		private void PutPieces()
 		{

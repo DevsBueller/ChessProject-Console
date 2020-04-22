@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace board
 {
-	class BoadException : Exception
+	class BoardException : Exception
 	{
-		public BoadException(string message) : base(message)
+		public BoardException(string message) : base(message)
 		{
 
 		}

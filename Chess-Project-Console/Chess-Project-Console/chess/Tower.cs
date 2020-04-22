@@ -14,7 +14,7 @@ namespace chess
 			Piece p = Bd.Piece(pos);
 			return p == null || p.Color != Color;
 		}
-		public override bool[,] PossibleMovies()
+		public override bool[,] PossibleMoves()
 		{
 			bool[,] mat = new bool[Bd.Linhas, Bd.Colunas];
 			Position pos = new Position(0, 0);

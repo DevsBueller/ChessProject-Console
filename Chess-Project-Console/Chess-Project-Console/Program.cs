@@ -18,26 +18,40 @@ namespace Chess_Project_Console
 				ChessMatch Match = new ChessMatch();
 				while (!Match.Finished)
 				{
-					Console.Clear();
-					Tela.PrintBoard(Match.Bd);
+					try
+					{
+						Console.Clear();
+						Tela.PrintBoard(Match.Bd);
+						Console.WriteLine();
+						Console.WriteLine("Turno: " + Match.shift);
+						Console.WriteLine("Aguardando jogada: " + Match.currentPlayer);
 
-					Console.WriteLine();
-					Console.Write("Origem: ");
-					Position origin = Tela.ReadChessPosition().ToPosition();
+						Console.WriteLine();
+						Console.Write("Origem: ");
+						Position origin = Tela.ReadChessPosition().ToPosition();
+						Match.ValidateOriginPosition(origin);
+						Console.Clear();
+						bool[,] possiblePositions = Match.Bd.Piece(origin).PossibleMoves();
+						Tela.PrintBoard(Match.Bd, possiblePositions);
+						Console.WriteLine();
+						Console.Write("Destino: ");
+						Position destination = Tela.ReadChessPosition().ToPosition();
+						Match.ValidateDestinationPosition(origin, destination);
 
-					Console.Clear();
-					bool[,] possiblePositions = Match.Bd.Piece(origin).PossibleMovies();
-					Tela.PrintBoard(Match.Bd, possiblePositions);
-					Console.WriteLine();
-					Console.Write("Destino: ");
-					Position destination = Tela.ReadChessPosition().ToPosition();
+						Match.MakeMove(origin, destination);
+					}
+					catch (BoardException e)
+					{
 
-					Match.ExecuteMove(origin, destination);
+						Console.WriteLine(e.Message);
+						Console.ReadLine();
+					}
+					
 
 				}
 
 			}
-			catch (BoadException e)
+			catch (BoardException e)
 			{
 
 				Console.WriteLine(e.Message);
