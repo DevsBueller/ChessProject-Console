@@ -1,11 +1,45 @@
 ﻿using board;
 using System;
 using chess;
+using System.Collections.Generic;
 
 namespace Chess_Project_Console
 {
 	class Tela
 	{
+		public static void PrintMatch(ChessMatch match)
+		{
+			Tela.PrintBoard(match.Bd);
+			Console.WriteLine();
+			PrintCatchedPieces(match);
+			Console.WriteLine();
+			Console.WriteLine("Turno: " + match.shift);
+			Console.WriteLine("Aguardando jogada: " + match.currentPlayer);
+
+		}
+		public static void PrintCatchedPieces(ChessMatch match)
+		{
+			Console.WriteLine("Peças capturadas");
+			Console.Write("Brancas: ");
+			PrintSet(match.CatchedPieces(Color.White));
+			Console.WriteLine();
+			Console.Write("Pretas: ");
+			ConsoleColor aux = Console.ForegroundColor;
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			PrintSet(match.CatchedPieces(Color.Black));
+			Console.ForegroundColor = aux;
+			Console.WriteLine();
+		}
+		public static void PrintSet(HashSet<Piece> set)
+		{
+			Console.Write("[");
+			foreach (var item in set)
+			{
+				Console.Write(item + " ");
+			}
+			Console.Write("]");
+
+		}
 		public static void PrintBoard(Board tab)
 		{
 			for (int i = 0; i < tab.Linhas; i++)
@@ -29,7 +63,7 @@ namespace Chess_Project_Console
 				Console.Write(8 - i + " ");
 				for (int j = 0; j < tab.Colunas; j++)
 				{
-					if(possiblePositions[i, j])
+					if (possiblePositions[i, j])
 					{
 						Console.BackgroundColor = alteredBlackground;
 					}

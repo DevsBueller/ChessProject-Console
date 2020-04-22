@@ -20,11 +20,9 @@ namespace Chess_Project_Console
 				{
 					try
 					{
+						
 						Console.Clear();
-						Tela.PrintBoard(Match.Bd);
-						Console.WriteLine();
-						Console.WriteLine("Turno: " + Match.shift);
-						Console.WriteLine("Aguardando jogada: " + Match.currentPlayer);
+						Tela.PrintMatch(Match);
 
 						Console.WriteLine();
 						Console.Write("Origem: ");
