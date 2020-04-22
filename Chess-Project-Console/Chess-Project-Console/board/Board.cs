@@ -24,7 +24,7 @@ namespace board
 		}
 
 
-		public void ColocarPeca(Piece p, Position pos)
+		public void PutPiece(Piece p, Position pos)
 		{
 			if (PositionExist(pos))
 			{
@@ -33,6 +33,20 @@ namespace board
 				pieces[pos.Linha, pos.Coluna] = p;
 				p.Position = pos;
 			
+		}
+		public Piece GetPiece(Position pos)
+		{
+			if(Piece(pos) == null)
+			{
+				return null;
+			}
+			Piece aux = Piece(pos);
+			aux.Position = null;
+			pieces[pos.Linha, pos.Coluna] = null;
+			return aux;
+
+
+
 		}
 		public bool PositionExist(Position pos)
 		{

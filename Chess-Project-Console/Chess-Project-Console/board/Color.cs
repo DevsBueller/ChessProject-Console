@@ -10,6 +10,6 @@ namespace board
 		Blue,
 		Red,
 		Green, 
-		Orange
+		
 	}
 }

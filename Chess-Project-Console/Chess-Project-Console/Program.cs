@@ -15,15 +15,23 @@ namespace Chess_Project_Console
 		{
 			try
 			{
-				Board Bd = new Board(8, 8);
-				Bd.ColocarPeca(new Tower(Bd, Color.Black), new Position(0, 0));
-				Bd.ColocarPeca(new Tower(Bd, Color.Black), new Position(1, 7));
-				Bd.ColocarPeca(new King(Bd, Color.Black), new Position(1, 3));
-				Bd.ColocarPeca(new Tower(Bd, Color.White), new Position(3, 5));
-				Tela.PrintBoard(Bd);
+				ChessMatch Match = new ChessMatch();
+				while (!Match.Finished)
+				{
+					Console.Clear();
+					Tela.PrintBoard(Match.Bd);
+					Console.WriteLine();
+					Console.WriteLine("Origem:");
+					Position origin = Tela.ReadChessPosition().ToPosition();
+					Console.WriteLine("Destino");
+					Position destination = Tela.ReadChessPosition().ToPosition();
+
+					Match.ExecuteMove(origin, destination);
+
+				}
 
 			}
-			catch (Exception e)
+			catch (BoadException e)
 			{
 
 				Console.WriteLine(e.Message);

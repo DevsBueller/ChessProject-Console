@@ -16,5 +16,9 @@ namespace board
 			QtMovies = 0;
 			Bd = board;
 		}
+		public void AddQtMovies()
+		{
+			QtMovies++;
+		}
 	}
 }
