@@ -37,6 +37,25 @@ namespace chess
 			{
 				catched.Add(catchedPiece);
 			}
+
+			//#Jogada especial Roque pequeno
+			if (p is King && destination.Coluna == origin.Coluna + 2)
+			{
+				Position tOrigin = new Position(origin.Linha, origin.Coluna + 3);
+				Position tDestination = new Position(origin.Linha, origin.Coluna + 1);
+				Piece T = Bd.GetPiece(tOrigin);
+				T.AddQtMovies();
+				Bd.PutPiece(T, tDestination);
+			}
+			//#Jogada especial Roque Grande
+			if (p is King && destination.Coluna == origin.Coluna - 2)
+			{
+				Position tOrigin = new Position(origin.Linha, origin.Coluna - 4);
+				Position tDestination = new Position(origin.Linha, origin.Coluna - 1);
+				Piece T = Bd.GetPiece(tOrigin);
+				T.AddQtMovies();
+				Bd.PutPiece(T, tDestination);
+			}
 			return catchedPiece;
 		}
 		private void undoMove(Position origin, Position destination, Piece catchedPiece)
@@ -49,6 +68,25 @@ namespace chess
 				catched.Remove(catchedPiece);
 			}
 			Bd.PutPiece(p, origin);
+
+			//#Jogada especial Roque pequeno
+			if (p is King && destination.Coluna == origin.Coluna + 2)
+			{
+				Position tOrigin = new Position(origin.Linha, origin.Coluna + 3);
+				Position tDestination = new Position(origin.Linha, origin.Coluna + 1);
+				Piece T = Bd.GetPiece(tOrigin);
+				T.DecrementQtMovies();
+				Bd.PutPiece(T, tDestination);
+			}
+			//#Jogada especial Roque grande
+			if (p is King && destination.Coluna == origin.Coluna - 2)
+			{
+				Position tOrigin = new Position(origin.Linha, origin.Coluna -4);
+				Position tDestination = new Position(origin.Linha, origin.Coluna - 1);
+				Piece T = Bd.GetPiece(tOrigin);
+				T.DecrementQtMovies();
+				Bd.PutPiece(T, tDestination);
+			}
 		}
 		public void MakeMove(Position origin, Position destination)
 		{
@@ -219,7 +257,7 @@ namespace chess
 			PutNewPiece('b', 1, new Knight(Bd, Color.White));
 			PutNewPiece('c', 1, new Bishop(Bd, Color.White));
 			PutNewPiece('d', 1, new Queen(Bd, Color.White));
-			PutNewPiece('e', 1, new King(Bd, Color.White));
+			PutNewPiece('e', 1, new King(Bd, Color.White, this));
 			PutNewPiece('f', 1, new Bishop(Bd, Color.White));
 			PutNewPiece('g', 1, new Knight(Bd, Color.White));
 			PutNewPiece('h', 1, new Tower(Bd, Color.White));
@@ -237,7 +275,7 @@ namespace chess
 			PutNewPiece('b', 8, new Knight(Bd, Color.Black));
 			PutNewPiece('c', 8, new Bishop(Bd, Color.Black));
 			PutNewPiece('d', 8, new Queen(Bd, Color.Black));
-			PutNewPiece('e', 8, new King(Bd, Color.Black));
+			PutNewPiece('e', 8, new King(Bd, Color.Black, this));
 			PutNewPiece('f', 8, new Bishop(Bd, Color.Black));
 			PutNewPiece('g', 8, new Knight(Bd, Color.Black));
 			PutNewPiece('h', 8, new Tower(Bd, Color.Black));

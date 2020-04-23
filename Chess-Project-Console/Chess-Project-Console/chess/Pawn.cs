@@ -15,7 +15,7 @@ namespace chess
 		private bool ExistEnemie(Position pos)
 		{
 			Piece p = Bd.Piece(pos);
-			return p == null || p.Color != Color;
+			return p != null && p.Color != Color;
 		}
 		private bool Free(Position pos)
 		{
@@ -27,29 +27,32 @@ namespace chess
 			bool[,] mat = new bool[Bd.Linhas, Bd.Colunas];
 			Position pos = new Position(0, 0);
 
-			if(Color == Color.White)
+
+			if (Color == Color.White)
 			{
-				pos.DefineValue(Position.Linha -1, Position.Coluna);
-				if(Bd.ValidPosition(pos) && Free(pos) )
+				pos.DefineValue(Position.Linha - 1, Position.Coluna);
+				if (Bd.ValidPosition(pos) && Free(pos))
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
 				pos.DefineValue(Position.Linha - 2, Position.Coluna);
-				if (Bd.ValidPosition(pos) && Free(pos) && QtMovies == 0)
+				Position p2 = new Position(Position.Linha - 1, Position.Coluna);
+				if (Bd.ValidPosition(p2) && Free(p2) && Bd.ValidPosition(pos) && Free(pos) && QtMovies == 0)
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
-				pos.DefineValue(Position.Linha - 1, Position.Coluna-1);
+				pos.DefineValue(Position.Linha - 1, Position.Coluna - 1);
 				if (Bd.ValidPosition(pos) && ExistEnemie(pos))
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
-				pos.DefineValue(Position.Linha - 1, Position.Coluna+1);
+				pos.DefineValue(Position.Linha - 1, Position.Coluna + 1);
 				if (Bd.ValidPosition(pos) && ExistEnemie(pos))
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
-			}else
+			}
+			else
 			{
 				pos.DefineValue(Position.Linha + 1, Position.Coluna);
 				if (Bd.ValidPosition(pos) && Free(pos))
@@ -57,7 +60,8 @@ namespace chess
 					mat[pos.Linha, pos.Coluna] = true;
 				}
 				pos.DefineValue(Position.Linha + 2, Position.Coluna);
-				if (Bd.ValidPosition(pos) && Free(pos) && QtMovies == 0)
+				Position p2 = new Position(Position.Linha + 1, Position.Coluna);
+				if (Bd.ValidPosition(p2) && Free(p2) && Bd.ValidPosition(pos) && Free(pos) && QtMovies == 0)
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
@@ -71,11 +75,15 @@ namespace chess
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
-
 			}
+
 			return mat;
 
-
 		}
+
+
 	}
 }
+
+
+

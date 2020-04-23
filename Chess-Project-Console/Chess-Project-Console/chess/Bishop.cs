@@ -14,7 +14,7 @@ namespace chess
 		{
 			return "B";
 		}
-		public bool CanMove(Position pos)
+		private bool CanMove(Position pos)
 		{
 			Piece p = Bd.Piece(pos);
 			return p == null || p.Color != Color;
@@ -23,7 +23,9 @@ namespace chess
 		public override bool[,] PossibleMoves()
 		{
 			bool[,] mat = new bool[Bd.Linhas, Bd.Colunas];
+
 			Position pos = new Position(0, 0);
+			
 			// no
 			pos.DefineValue(Position.Linha - 1, Position.Coluna -1);
 			while (Bd.ValidPosition(pos) && CanMove(pos))
@@ -36,8 +38,9 @@ namespace chess
 				pos.DefineValue(pos.Linha - 1, pos.Coluna -1 );
 
 			}
+
 			// ne
-			pos.DefineValue(Position.Linha - 1, Position.Coluna+1);
+			pos.DefineValue(Position.Linha - 1, Position.Coluna + 1);
 			while (Bd.ValidPosition(pos) && CanMove(pos))
 			{
 				mat[pos.Linha, pos.Coluna] = true;
@@ -48,8 +51,9 @@ namespace chess
 				pos.DefineValue(pos.Linha - 1, pos.Coluna + 1); ;
 
 			}
+
 			// se
-			pos.DefineValue(Position.Linha+1, Position.Coluna + 1);
+			pos.DefineValue(Position.Linha + 1, Position.Coluna + 1);
 			while (Bd.ValidPosition(pos) && CanMove(pos))
 			{
 				mat[pos.Linha, pos.Coluna] = true;
@@ -57,12 +61,13 @@ namespace chess
 				{
 					break;
 				}
-				pos.DefineValue(pos.Linha+1, pos.Coluna + 1);
+				pos.DefineValue(pos.Linha + 1, pos.Coluna + 1);
 
 
 			}
+
 			// so
-			pos.DefineValue(Position.Linha+1, Position.Coluna - 1);
+			pos.DefineValue(Position.Linha + 1, Position.Coluna - 1);
 			while (Bd.ValidPosition(pos) && CanMove(pos))
 			{
 				mat[pos.Linha, pos.Coluna] = true;
@@ -70,7 +75,7 @@ namespace chess
 				{
 					break;
 				}
-				pos.DefineValue(pos.Linha+1, pos.Coluna - 1);
+				pos.DefineValue(pos.Linha + 1, pos.Coluna - 1);
 
 
 			}

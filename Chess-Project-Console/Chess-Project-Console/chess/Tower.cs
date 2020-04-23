@@ -12,7 +12,7 @@ namespace chess
 		{
 			return "T";
 		}
-		public bool CanMove(Position pos)
+		private bool CanMove(Position pos)
 		{
 			Piece p = Bd.Piece(pos);
 			return p == null || p.Color != Color;
