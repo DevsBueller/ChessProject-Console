@@ -21,6 +21,10 @@ namespace board
 		{
 			QtMovies++;
 		}
+		public void DecrementQtMovies()
+		{
+			QtMovies--;
+		}
 		public bool ExistPossibleMoves()
 		{
 			bool[,] mat = PossibleMoves();
