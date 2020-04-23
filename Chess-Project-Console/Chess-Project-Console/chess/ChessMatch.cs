@@ -66,9 +66,15 @@ namespace chess
 			{
 				Check = false;
 			}
-			shift++;
-			ChangePlayer();
-
+			if (TestMate(adversaryColor(currentPlayer)))
+			{
+				Finished = true;
+			}
+			else
+			{
+				shift++;
+				ChangePlayer();
+			}
 		}
 		public void ValidateOriginPosition(Position pos)
 		{
@@ -158,7 +164,7 @@ namespace chess
 			Piece R = King(color);
 			if (R == null)
 			{
-				throw new BoardException("Não tem a peça Rei no tabuleiro");
+				throw new BoardException("Não tem Rei da cor" + color + "no tabuleiro: ");
 			}
 			foreach (Piece item in PiecesOnBoard(adversaryColor(color)))
 			{
@@ -171,6 +177,37 @@ namespace chess
 			}
 			return false;
 		}
+		public bool TestMate(Color color)
+		{
+			if (!InCheck(color))
+			{
+				return false;
+			}
+			foreach (var item in PiecesOnBoard(color))
+			{
+				bool[,] mat = item.PossibleMoves();
+				for (int i = 0; i < Bd.Linhas; i++)
+				{
+					for (int j = 0; j < Bd.Colunas; j++)
+					{
+						if (mat[i, j])
+						{
+							Position origin = item.Position;
+							Position destination = new Position(i, j);
+							Piece catchedPiece = ExecuteMove(origin, destination);
+							bool testCheck = InCheck(color);
+							undoMove(origin, destination, catchedPiece);
+							if (!testCheck)
+							{
+								return false;
+							}
+						}
+
+					}
+				}
+			}
+			return true;
+		}
 		public void PutNewPiece(char coluna, int linha, Piece piece)
 		{
 			Bd.PutPiece(piece, new ChessPosition(coluna, linha).ToPosition());
@@ -179,18 +216,18 @@ namespace chess
 		private void PutPieces()
 		{
 			PutNewPiece('c', 1, new Tower(Bd, Color.White));
-			PutNewPiece('c', 2, new Tower(Bd, Color.White));
-			PutNewPiece('d', 2, new Tower(Bd, Color.White));
-			PutNewPiece('e', 2, new Tower(Bd, Color.White));
-			PutNewPiece('e', 1, new Tower(Bd, Color.White));
+			//PutNewPiece('c', 2, new Tower(Bd, Color.White));
+			//PutNewPiece('d', 2, new Tower(Bd, Color.White));
+			//PutNewPiece('e', 2, new Tower(Bd, Color.White));
+			PutNewPiece('h', 7, new Tower(Bd, Color.White));
 			PutNewPiece('d', 1, new King(Bd, Color.White));
 
-			PutNewPiece('c', 7, new Tower(Bd, Color.Black));
-			PutNewPiece('c', 8, new Tower(Bd, Color.Black));
-			PutNewPiece('d', 7, new Tower(Bd, Color.Black));
-			PutNewPiece('e', 7, new Tower(Bd, Color.Black));
-			PutNewPiece('e', 8, new Tower(Bd, Color.Black));
-			PutNewPiece('d', 8, new King(Bd, Color.Black));
+			//PutNewPiece('c', 7, new Tower(Bd, Color.Black));
+			//PutNewPiece('c', 8, new Tower(Bd, Color.Black));
+			//PutNewPiece('d', 7, new Tower(Bd, Color.Black));
+			//PutNewPiece('e', 7, new Tower(Bd, Color.Black));
+			PutNewPiece('b', 8, new Tower(Bd, Color.Black));
+			PutNewPiece('a', 8, new King(Bd, Color.Black));
 
 
 		}

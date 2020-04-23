@@ -47,6 +47,8 @@ namespace Chess_Project_Console
 					
 
 				}
+				Console.Clear();
+				Tela.PrintMatch(Match);
 
 			}
 			catch (BoardException e)

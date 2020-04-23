@@ -55,7 +55,7 @@ namespace chess
 
 				
 			}
-			// right
+			// left
 			pos.DefineValue(Position.Linha, Position.Coluna - 1);
 			while (Bd.ValidPosition(pos) && CanMove(pos))
 			{
