@@ -136,6 +136,19 @@ namespace chess
 				undoMove(origin, destination, catchedPiece);
 				throw new BoardException("Você não pode se colocar em Xeque");
 			}
+			Piece p = Bd.Piece(destination);
+			//# Jogada especial promoção
+			if(p is Pawn)
+			{
+				if ((p.Color == Color.White && destination.Linha == 0) || (p.Color == Color.Black && destination.Linha == 7))
+				{
+					p = Bd.GetPiece(destination);
+					pieces.Remove(p);
+					Piece queen = new Queen(Bd, p.Color);
+					Bd.PutPiece(queen, destination);
+					pieces.Add(queen);
+				}
+			}
 			if (InCheck(adversaryColor(currentPlayer)))
 			{
 				Check = true;
@@ -153,7 +166,7 @@ namespace chess
 				shift++;
 				ChangePlayer();
 			}
-			Piece p = Bd.Piece(destination);
+		
 
 			//#Jogada especial enPassant
 			if(p is Pawn &&(destination.Linha == origin.Linha - 2 || destination.Linha == origin.Linha + 2))
