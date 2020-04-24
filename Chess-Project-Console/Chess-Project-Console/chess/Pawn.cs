@@ -4,9 +4,10 @@ namespace chess
 {
 	class Pawn : Piece
 	{
-		public Pawn(Board bd, Color color) : base(bd, color)
+		private ChessMatch match;
+		public Pawn(Board bd, Color color, ChessMatch match) : base(bd, color)
 		{
-
+			this.match = match;
 		}
 		public override string ToString()
 		{
@@ -51,6 +52,21 @@ namespace chess
 				{
 					mat[pos.Linha, pos.Coluna] = true;
 				}
+
+				//# Jogada especial enPassant
+				if (Position.Linha == 3)
+				{
+					Position left = new Position(Position.Linha, Position.Coluna - 1);
+					if (Bd.ValidPosition(left) && ExistEnemie(left) && Bd.Piece(left) == match.vulnerableEnPassant)
+					{
+						mat[left.Linha -1, left.Coluna] = true;
+					}
+					Position right = new Position(Position.Linha, Position.Coluna + 1);
+					if (Bd.ValidPosition(right) && ExistEnemie(right) && Bd.Piece(right) == match.vulnerableEnPassant)
+					{
+						mat[right.Linha-1, right.Coluna] = true;
+					}
+				}
 			}
 			else
 			{
@@ -74,6 +90,20 @@ namespace chess
 				if (Bd.ValidPosition(pos) && ExistEnemie(pos))
 				{
 					mat[pos.Linha, pos.Coluna] = true;
+				}
+				//# Jogada especial enPassant
+				if (Position.Linha == 4)
+				{
+					Position left = new Position(Position.Linha, Position.Coluna - 1);
+					if (Bd.ValidPosition(left) && ExistEnemie(left) && Bd.Piece(left) == match.vulnerableEnPassant)
+					{
+						mat[left.Linha+1, left.Coluna] = true;
+					}
+					Position right = new Position(Position.Linha, Position.Coluna + 1);
+					if (Bd.ValidPosition(right) && ExistEnemie(right) && Bd.Piece(right) == match.vulnerableEnPassant)
+					{
+						mat[right.Linha+1, right.Coluna] = true;
+					}
 				}
 			}
 
